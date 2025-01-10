@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const popupList = document.getElementById('popupList');
     const popupTitle = document.getElementById('popupTitle');
     const closePopup = document.getElementById('closePopup');
+    const addCurrentDateButton = document.getElementById('addCurrentDateButton');
+    const addCustomDateButton = document.getElementById('addCustomDateButton');
+    const customDateInput = document.getElementById('customDateInput');
 
     const habitHistory = {
         bed: [],
@@ -16,31 +19,53 @@ document.addEventListener('DOMContentLoaded', function () {
         toothbrush: 'Changed Toothbrush',
     };
 
-    function addHabitEntry(habit) {
-        const date = new Date().toLocaleString();
-        habitHistory[habit].push(date);
-    }
+    let currentHabit = '';
 
     function showPopup(habit) {
+        currentHabit = habit;
         popupTitle.textContent = `${habits[habit]} History`;
         popupList.innerHTML = habitHistory[habit].map(date => `<li>${date}</li>`).join('');
         popup.classList.remove('hidden');
     }
 
+    function addHabitEntry(date) {
+        habitHistory[currentHabit].push(date);
+        showPopup(currentHabit); // Update the popup with the new entry
+    }
+
+    function addCurrentDate() {
+        const date = new Date().toLocaleString();
+        addHabitEntry(date);
+    }
+
+    function toggleCustomDateInput() {
+        customDateInput.classList.toggle('hidden');
+    }
+
+    function addCustomDate() {
+        const customDate = customDateInput.value;
+        if (customDate) {
+            addHabitEntry(new Date(customDate).toLocaleDateString());
+            customDateInput.value = '';
+            customDateInput.classList.add('hidden');
+        }
+    }
+
     document.getElementById('bedButton').addEventListener('click', function () {
-        addHabitEntry('bed');
         showPopup('bed');
     });
 
     document.getElementById('bathtubButton').addEventListener('click', function () {
-        addHabitEntry('bathtub');
         showPopup('bathtub');
     });
 
     document.getElementById('toothbrushButton').addEventListener('click', function () {
-        addHabitEntry('toothbrush');
         showPopup('toothbrush');
     });
+
+    addCurrentDateButton.addEventListener('click', addCurrentDate);
+    addCustomDateButton.addEventListener('click', toggleCustomDateInput);
+    customDateInput.addEventListener('change', addCustomDate);
 
     closePopup.addEventListener('click', function () {
         popup.classList.add('hidden');
