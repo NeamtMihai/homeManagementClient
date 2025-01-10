@@ -1,21 +1,27 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
-    max-width: 600px;
-    margin: 50px auto;
+    max-width: 500px;
     background: white;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 .button-container {
@@ -24,30 +30,65 @@ h1 {
     margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
+.habit-button {
+    padding: 15px 30px;
     font-size: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     cursor: pointer;
-    background-color: #007BFF;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover {
-    background-color: #0056b3;
+.habit-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.habit-button:active {
+    transform: scale(0.95);
 }
 
 #history {
     margin-top: 20px;
+    text-align: left;
+}
+
+#history h2 {
+    font-size: 1.5rem;
+    color: #555;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
 }
 
 #history ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 #history li {
-    padding: 5px 0;
-    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#history li:last-child {
+    border-bottom: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function addHabitEntry(habit) {
         const date = new Date().toLocaleString();
         const listItem = document.createElement('li');
-        listItem.textContent = `${habits[habit]} on ${date}`;
+        listItem.innerHTML = `<span>${habits[habit]}</span><span>${date}</span>`;
         historyList.appendChild(listItem);
     }
 
