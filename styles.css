@@ -26,7 +26,8 @@ h1 {
 
 .button-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    gap: 15px;
     margin-bottom: 20px;
 }
 
@@ -50,45 +51,57 @@ h1 {
     transform: scale(0.95);
 }
 
-#history {
-    margin-top: 20px;
-    text-align: left;
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-#history h2 {
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
     font-size: 1.5rem;
-    color: #555;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
+    cursor: pointer;
 }
 
-#history ul {
+#popupTitle {
+    margin-bottom: 20px;
+}
+
+#popupList {
     list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
-#history li {
+#popupList li {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
     font-size: 1rem;
     color: #666;
-    display: flex;
-    justify-content: space-between;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
-#history li:last-child {
+#popupList li:last-child {
     border-bottom: none;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
