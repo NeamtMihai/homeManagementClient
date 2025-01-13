@@ -47,7 +47,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     function showPopup(habit) {
         currentHabit = habit;
         popupTitle.textContent = `${habit.name} History`;
-        popupList.innerHTML = habit.lastDate.date.map(date => `<li>${new Date(date).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })}</li>`).join('');
+        popupList.innerHTML = habit.lastDate.date.map((date, index) => {
+            const dateString = new Date(date).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
+            return `<li style="font-size: ${index === habit.lastDate.date.length - 1 ? '2em' : '1em'}">${dateString}</li>`;
+          }).join('');
+     //   popupList.innerHTML = habit.lastDate.date.map(date => `<li>${new Date(date).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })}</li>`).join('');
         popup.classList.remove('hidden');
     }
 
