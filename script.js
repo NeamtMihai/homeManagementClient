@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     async function fetchHabits() {
         try {
             const response = await fetch(`${backEndUrl}/${userId}`, {
-                method: 'GET', 
+                method: 'GET',
                 headers: {
-                    'Authorization': 'elvetia_tara_faina', 
+                    'Authorization': 'elvetia_tara_faina',
                     'Content-Type': 'application/json'
                 }
             });
@@ -47,11 +47,24 @@ document.addEventListener('DOMContentLoaded', async function () {
     function showPopup(habit) {
         currentHabit = habit;
         popupTitle.textContent = `${habit.name} History`;
-        popupList.innerHTML = habit.lastDate.date.map((date, index) => {
+        const datesHtml = habit.lastDate.date.map((date, index) => {
             const dateString = new Date(date).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
             return `<li style="font-size: ${index === habit.lastDate.date.length - 1 ? '2em' : '1em'}">${dateString}</li>`;
-          }).join('');
-     //   popupList.innerHTML = habit.lastDate.date.map(date => `<li>${new Date(date).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })}</li>`).join('');
+        }).join('');
+
+        // Calculate the date two weeks after the last date
+        const lastDate = new Date(habit.lastDate.date[habit.lastDate.date.length - 1]);
+        const twoWeeksLater = new Date(lastDate);
+        twoWeeksLater.setDate(lastDate.getDate() + 14);
+        const twoWeeksLaterString = twoWeeksLater.toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' });
+
+        // Append the new date with a different color
+        const additionalDateHtml = `<li style="font-size: 2em; color: purple;">❯${twoWeeksLaterString}❯</li>`;
+
+        // Combine the original list with the new item
+        popupList.innerHTML = datesHtml + additionalDateHtml;
+
+        //   popupList.innerHTML = habit.lastDate.date.map(date => `<li>${new Date(date).toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: '2-digit' })}</li>`).join('');
         popup.classList.remove('hidden');
     }
 
